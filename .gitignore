@@ -1,0 +1,15 @@
+# Ignore sensitive configuration files
+config.json
+.env
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+__pycache__/
+*.pyc
+
+
+# Ignore system files
+.DS_Store
+Thumbs.db

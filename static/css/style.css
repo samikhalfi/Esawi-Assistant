@@ -1,0 +1,267 @@
+:root {
+  --bg-primary: #0a0a1a;
+  --text-primary: #00ffff;
+  --accent-color: #00ffff;
+  --input-bg: rgba(10, 10, 26, 0.8);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Roboto Mono', monospace;
+  background-color: var(--bg-primary);
+  overflow: hidden; /* Prevents body from scrolling */
+}
+
+.large-header {
+  position: relative;
+  width: 100%;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+#demo-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.app-container {
+  position: relative;
+  z-index: 10;
+  max-width: 85%;
+  left: 7%; /* Ensures the container fits within the viewport width */
+  height: 95vh; /* Makes the container fill the screen height */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevents overflow of content outside the main container */
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-content {
+  perspective: 500px;
+}
+
+.glitch {
+  color: var(--text-primary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: relative;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  transform: rotateX(10deg);
+  animation: subtle-float 3s infinite ease-in-out;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 red;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 blue;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+.subtitle {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-top: 10px;
+  transform: rotateX(10deg);
+}
+
+.chat-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 10, 26, 0.7);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  overflow-y: auto; /* Allows scrolling within the chat container */
+}
+
+.chat-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  margin-right: 8px;
+  opacity: 0.5;
+}
+
+.msg-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) transparent;
+}
+
+.msg-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.msg-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.msg-container::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 3px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(20px);
+  transition: transform 0.3s ease;
+}
+
+.chat-bubble:hover {
+  transform: translateZ(30px) scale(1.02);
+}
+
+.chat-bubble.user {
+  background-color: rgba(0, 255, 255, 0.1);
+  color: var(--text-primary);
+  align-self: flex-end;
+  margin-left: auto;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.chat-bubble.bot {
+  background-color: rgba(0, 0, 255, 0.1);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border: 1px solid rgba(0, 0, 255, 0.2);
+}
+
+.input-container {
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: var(--input-bg);
+  border-radius: 25px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+#chatInput {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  padding: 12px 15px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+#chatInput::placeholder {
+  color: rgba(0, 255, 255, 0.5);
+}
+
+.input-submit {
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.input-submit:hover {
+  transform: scale(1.1);
+}
+
+.input-submit svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--accent-color);
+}
+
+@keyframes subtle-float {
+  0%, 100% { transform: rotateX(10deg) translateY(0); }
+  50% { transform: rotateX(10deg) translateY(-10px); }
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(48px, 9999px, 29px, 0); }
+  4.9% { clip: rect(48px, 9999px, 29px, 0); }
+  5% { clip: rect(29px, 9999px, 63px, 0); }
+  5.1% { clip: rect(54px, 9999px, 59px, 0); }
+  10% { clip: rect(54px, 9999px, 59px, 0); }
+  10.1% { clip: rect(25px, 9999px, 39px, 0); }
+  20% { clip: rect(25px, 9999px, 39px, 0); }
+  20.1% { clip: rect(8px, 9999px, 14px, 0); }
+  30% { clip: rect(8px, 9999px, 14px, 0); }
+  30.1% { clip: rect(54px, 9999px, 59px, 0); }
+  40% { clip: rect(54px, 9999px, 59px, 0); }
+  40.1% { clip: rect(2px, 9999px, 48px, 0); }
+  50% { clip: rect(2px, 9999px, 48px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(29px, 9999px, 63px, 0); }
+  4.9% { clip: rect(29px, 9999px, 63px, 0); }
+  5% { clip: rect(10px, 9999px, 54px, 0); }
+  5.1% { clip: rect(25px, 9999px, 39px, 0); }
+  10% { clip: rect(25px, 9999px, 39px, 0); }
+  10.1% { clip: rect(48px, 9999px, 29px, 0); }
+  20% { clip: rect(48px, 9999px, 29px, 0); }
+  20.1% { clip: rect(54px, 9999px, 59px, 0); }
+  30% { clip: rect(54px, 9999px, 59px, 0); }
+  30.1% { clip: rect(8px, 9999px, 14px, 0); }
+  40% { clip: rect(8px, 9999px, 14px, 0); }
+  40.1% { clip: rect(2px, 9999px, 48px, 0); }
+  50% { clip: rect(2px, 9999px, 48px, 0); }
+}

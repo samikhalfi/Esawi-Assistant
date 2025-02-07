@@ -18,9 +18,6 @@ ESI Assistant is an AI-powered assistant designed to help students and professio
 - **HTML/CSS**: For building the user interface
 - **asyncio**: For asynchronous handling of requests
 
-## Setup Instructions
-
-Follow these steps to run the project locally.
 
 ### Prerequisites
 

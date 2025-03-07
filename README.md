@@ -23,4 +23,4 @@ ESI Assistant is an AI-powered assistant designed to help students and professio
 
 1. **Python** (version 3.7 or above)
 2. **pip** (Python package installer)
-3. **Google API Key** for integrating Gemini AI (instructions below)
+3. **Google API Key** for integrating Gemini AI
